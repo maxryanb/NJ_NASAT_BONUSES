@@ -3,18 +3,25 @@ from random import random
 import json
 import os
 
-player_dicts = {}
-for filename in os.listdir('players'):
-    if filename.endswith(".json"):
-        with open("players/"+filename) as f:
-            player_dicts[filename[:-5]] = json.load(f)
+# import jsons as dictionaries
+def load_players():  
+    player_dicts = {}
+    for filename in os.listdir('players'):
+        if filename.endswith(".json"):
+            with open("players/"+filename) as f:
+                player_dicts[filename[:-5]] = json.load(f)
+    return(player_dicts)
 
-print(player_dicts)
 
-def dict_to_string(d):
+player_dicts = load_players()
+
+
+# TO BE MADE: convert player json to result string
+def dict_to_string(d):  
     string = ""
 
 
+# create random result string of given length
 def rando(length):
     rand_str = ""
     for i in range(length):
@@ -32,7 +39,7 @@ bonus_count = 100
 names = ["A", "B", "C", "D",
          "E", "F", "G", "H", "I"]
 
-# create dictionary with random data
+# temporary
 
 
 def load_random_data(names):
@@ -45,6 +52,7 @@ def load_random_data(names):
 
 
 players = load_random_data(names)
+
 
 # create dictionaries of result scores and result strings for each possible team
 def create_teams(players):
@@ -94,8 +102,6 @@ def get_best_teams(result_scores):
 
 best_teams, best_score = get_best_teams(result_scores)
 
-# create dictionary for players in the team
-
 
 def create_dict(team):
     d = {key: value for key, value in players.items() if key in team}
@@ -107,5 +113,5 @@ def print_team_dicts(teams):
         print(create_dict(team))
 
 
-# print("Best teams: "+str(best_teams))
-# print("Combined score: "+str(best_score))
+print("Best teams: "+str(best_teams))
+print("Combined score: "+str(best_score))
