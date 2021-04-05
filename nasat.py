@@ -40,8 +40,6 @@ names = ["A", "B", "C", "D",
          "E", "F", "G", "H", "I"]
 
 # temporary
-
-
 def load_random_data(names):
     players = {}
 
