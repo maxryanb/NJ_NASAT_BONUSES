@@ -36,13 +36,16 @@ def get_random_data(bonus_part_count):
                 rand_str += "0"
         return rand_str
 
-    names = ["A", "B", "C", "D",
-             "E", "F", "G", "H", "I"]
+    names = ["Arnold", "Beth", "Charlie", "Danielle",
+             "Ethan", "Franny", "Gerald", "Hannah", "Ivan"]
     players = {}
     for name in names:
         players[name] = rando(bonus_part_count)
     return players
-# players = get_random_data(99)
+
+
+# load in random data
+# players = get_random_data(3*20)
 
 
 # create dictionaries of result scores and result strings for each possible team
@@ -65,14 +68,15 @@ for team in teams:
     result_scores[team] = result.count("1")
     result_strings[team] = result
 
+# sort results by value
+sorted_tuples = sorted(result_scores.items(),
+                       key=lambda item: item[1], reverse=True)
+result_scores = {key: value for key, value in sorted_tuples}
 
-# find teams with best combined score
-best_teams = []
+# create dictionary with top 10 teams, sorted by value
+best_teams = {key: value for key, value in result_scores.items(
+) if key in list(result_scores.keys())[0:10]}
 best_score = max(list(result_scores.values()))
-for team in list(result_scores.keys()):
-    if result_scores[team] == best_score:
-        best_teams.append(team)
-
 
 # create sub-dictionary of players dictionary with players of an inputted team
 def create_dict(team):
@@ -87,4 +91,3 @@ def print_team_dicts(teams):
 
 
 print("Best teams: "+str(best_teams))
-print("Combined score: "+str(best_score))
