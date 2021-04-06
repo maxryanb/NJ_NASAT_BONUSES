@@ -3,6 +3,7 @@ from random import random
 import json
 import os
 
+
 # load jsons as dictionaries
 player_dicts = {}
 for filename in os.listdir('players'):
@@ -21,7 +22,7 @@ for player in player_dicts:
     players[player] = string
 
 
-# to generate random player data for testing
+# generate random player data for testing
 def get_random_data(bonus_part_count):
     # create random result string of given length
     def rando(length):
