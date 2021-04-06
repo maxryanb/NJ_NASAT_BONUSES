@@ -3,8 +3,8 @@ from random import random
 import json
 import os
 
-# import jsons as dictionaries
-def load_players():  
+# load jsons as dictionaries
+def load_players():
     player_dicts = {}
     for filename in os.listdir('players'):
         if filename.endswith(".json"):
@@ -16,41 +16,51 @@ def load_players():
 player_dicts = load_players()
 
 
-# TO BE MADE: convert player json to result string
-def dict_to_string(d):  
-    string = ""
-
-
-# create random result string of given length
-def rando(length):
-    rand_str = ""
-    for i in range(length):
-        boolean = random() > 0.8
-        if boolean:
-            rand_str += "1"
-        else:
-            rand_str += "0"
-    return rand_str
-
-
-bonus_count = 100
-
-
-names = ["A", "B", "C", "D",
-         "E", "F", "G", "H", "I"]
-
-# temporary
-def load_random_data(names):
+# convert player json dictionary to result string dictionary
+def dicts_to_strings(player_dicts):
     players = {}
+    for player in player_dicts:
+        string = ""
+        for li in list(player_dicts[player].values()):
+            for value in li:
+                string += str(value)
+        players[player] = string
+    return(players)
 
-    for name in names:
-        players[name] = rando(bonus_count)
+
+players = dicts_to_strings(player_dicts)
+
+
+# to generate random player data for testing 
+def get_random_data(bonus_count):
+    # create random result string of given length
+    def rando(length):
+        rand_str = ""
+        for i in range(length):
+            # arbitrarily each part has 20% chance of being gotten
+            boolean = random() > 0.8
+            if boolean:
+                rand_str += "1"
+            else:
+                rand_str += "0"
+        return rand_str
+
+    names = ["A", "B", "C", "D",
+             "E", "F", "G", "H", "I"]
+
+    def load_random_data(names):
+        players = {}
+
+        for name in names:
+            players[name] = rando(bonus_count)
+
+        return players
+
+    players = load_random_data(names)
 
     return players
 
-
-players = load_random_data(names)
-
+# players = get_random_data(100)
 
 # create dictionaries of result scores and result strings for each possible team
 def create_teams(players):
@@ -84,8 +94,9 @@ def create_teams(players):
 # store score and string dictionaries
 result_scores, result_strings = create_teams(players)
 
-
 # find teams with best combined score
+
+
 def get_best_teams(result_scores):
     best_teams_list = []
 
