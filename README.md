@@ -9,4 +9,4 @@ Currently in the players folder are five players with data for 3 bonuses. If one
 
 create_dict() and print_team_dicts() exist to display the names and invidividual conversion strings for teams if desired.
 
-Random data: there will be many teams close to each other in the top 10, which may make selection in this manner unnattractive. However, with real data, the presence of an abundance of specialists will likely make this not the case. Simulating real data is possible but would require adding data to and create new .jsons. If you would like to do this, you can make a fork.
+Random data: there will be many teams close to each other in the top 10, which may make selection in this manner unnattractive. However, with real data, the presence of an abundance of specialists will likely make this not the case. Simulating real data is possible but would require adding data to and create new .jsons.
