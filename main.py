@@ -22,7 +22,7 @@ for player in player_dicts:
 
 
 # to generate random player data for testing
-def get_random_data(bonus_count):
+def get_random_data(bonus_part_count):
     # create random result string of given length
     def rando(length):
         rand_str = ""
@@ -34,13 +34,14 @@ def get_random_data(bonus_count):
             else:
                 rand_str += "0"
         return rand_str
+
     names = ["A", "B", "C", "D",
              "E", "F", "G", "H", "I"]
     players = {}
     for name in names:
-        players[name] = rando(bonus_count)
+        players[name] = rando(bonus_part_count)
     return players
-# players = get_random_data(100)
+# players = get_random_data(99)
 
 
 # create dictionaries of result scores and result strings for each possible team
