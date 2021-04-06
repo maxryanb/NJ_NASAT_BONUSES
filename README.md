@@ -1,5 +1,5 @@
 # NJ_NASAT_BONUSES
-Stores bonus results of players and finds best set of four
+Stores bonus results of players and finds best team(s) of four.
 
 For use: populate players folder with jsons with name format playerName.json. 
 Bonus results are stored as can be seen in the existing json files: key is the number of the bonus (not meaningful to the code, just for convenience with user), value is a list containing bonus conversion.
