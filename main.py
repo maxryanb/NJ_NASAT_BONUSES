@@ -45,7 +45,7 @@ def get_random_data(bonus_part_count):
 
 
 # load in random data
-# players = get_random_data(3*20)
+players = get_random_data(3*20)
 
 
 # create dictionaries of result scores and result strings for each possible team
