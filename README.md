@@ -9,4 +9,4 @@ If one uncomments line 60, random data will instead be used with names as define
 
 create_dict() and print_team_dicts() exist to display the names and invidividual conversion strings for teams if desired for debugging or testing.
 
-## I am very welcome to suggestions or contributions! Just dm me on discord @maxryanb#7300.
+### I am very welcome to suggestions or contributions! Just dm me on discord @maxryanb#7300.
