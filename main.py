@@ -8,7 +8,7 @@ import os
 # load jsons as dictionaries
 player_dicts = {}
 for filename in os.listdir('players'):
-    if filename.endswith(".json"):
+    if filename.endswith(".json") and filename!="Joey.json":
         with open("players/"+filename) as f:
             player_dicts[filename[:-5]] = json.load(f)
 
