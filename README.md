@@ -8,3 +8,5 @@ Run main.py, it will print the top 10 sets of players that combine for the great
 If one uncomments line 60, random data will instead be used with names as defined by line 51 (can be edited) with number of bonuses as defined in the argument of the line 60 function call. Currently, 80% of bonus parts will be failed to be answered. This can be altered on line 44. This is to create a variance between different sets of 4 without adding additional factors to the data generation (e.g. the existence of easy/medium/hard parts).
 
 create_dict() and print_team_dicts() exist to display the names and invidividual conversion strings for teams if desired for debugging or testing.
+
+## I am very welcome to suggestions or contributions! Just dm me on discord @maxryanb#7300.
