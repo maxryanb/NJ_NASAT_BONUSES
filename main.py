@@ -1,3 +1,4 @@
+import sys
 import itertools
 from random import random
 import json
@@ -14,15 +15,26 @@ for filename in os.listdir('players'):
 
 # convert player json dictionary to result string dictionary
 players = {}
+
+# if one of the players has only heard the first n bonuses, set limit to n. if not, set to -1.
+limit = 60
 for player in player_dicts:
     string = ""
     for li in list(player_dicts[player].values()):
         for value in li:
             string += str(value)
+        if (limit > 0 and len(string) >= limit*3):
+            break
     players[player] = string
 
+# count number of bonuses
+if limit != -1:
+    count = limit
+else:
+    count = int(len(players[list(players.keys())[0]])/3)
 
-# generate random player data for testing
+
+# FOR TESTING CODE WITH RANDOM DATA: generate random player data for testing
 def get_random_data(bonus_part_count):
     # create random result string of given length
     def rando(length):
@@ -45,14 +57,16 @@ def get_random_data(bonus_part_count):
 
 
 # load in random data
-players = get_random_data(3*20)
+# players = get_random_data(3*20)
 
 
 # create dictionaries of result scores and result strings for each possible team
 result_scores = {}
 result_strings = {}
-# create list of all size 4 sets of players
-teams = list(itertools.combinations(players.keys(), 4))
+
+team_size = 4
+# create list of sets of players of given size
+teams = list(itertools.combinations(players.keys(), team_size))
 for team in teams:
     result = ""
     # iterate through bonuses
@@ -60,20 +74,25 @@ for team in teams:
         got = "0"
         # check if any player got bonus
         for player in team:
-            if players[player][i] == "1":
-                got = "1"
-                break
+            try:
+                if players[player][i] == "1":
+                    got = "1"
+                    break
+            except IndexError:
+                print("ERROR: Player \'" + player + "\' did not hear " + str(int(i/3) +
+                                                                         1) + " bonuses. Change value of \'limit\' variable on line 20 appropriately.")
+                sys.exit(1)
         # update result string
         result += got
-    result_scores[team] = result.count("1")
+    result_scores[team] = round(result.count("1")/(count*3)*30, 2)
     result_strings[team] = result
 
-# sort results by value
+# sort results by combined total (value)
 sorted_tuples = sorted(result_scores.items(),
                        key=lambda item: item[1], reverse=True)
 result_scores = {key: value for key, value in sorted_tuples}
 
-# create dictionary with top 10 teams, sorted by value
+# create dictionary with top 10 teams, sorted by combined total (value)
 best_teams = {key: value for key, value in result_scores.items(
 ) if key in list(result_scores.keys())[0:10]}
 best_score = max(list(result_scores.values()))
@@ -90,4 +109,5 @@ def print_team_dicts(teams):
         print(create_dict(team))
 
 
+print("Number of bonuses: " + str(count))
 print("Best teams: "+str(best_teams))
