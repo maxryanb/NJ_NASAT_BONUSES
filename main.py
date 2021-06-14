@@ -4,9 +4,10 @@ from random import random
 import json
 import os
 
-
 # load jsons as dictionaries
 player_dicts = {}
+
+
 def load_dicts(excluded={}):
     for filename in os.listdir('players'):
         if filename.endswith(".json") and not (filename[:-5] in excluded):
@@ -21,7 +22,7 @@ load_dicts(["Joey"])
 players = {}
 
 # if one of the players has only heard the first n bonuses, set limit to n. if not, set to -1.
-limit = 60
+limit = -1
 for player in player_dicts:
     string = ""
     for li in list(player_dicts[player].values()):
@@ -30,12 +31,6 @@ for player in player_dicts:
         if (limit > 0 and len(string) >= limit*3):
             break
     players[player] = string
-
-# count number of bonuses
-if limit != -1:
-    count = limit
-else:
-    count = int(len(players[list(players.keys())[0]])/3)
 
 
 # FOR TESTING CODE WITH RANDOM DATA: generate random player data for testing
@@ -62,6 +57,12 @@ def get_random_data(bonus_part_count):
 
 # load in random data
 # players = get_random_data(3*20)
+
+# count number of bonuses
+if limit != -1:
+    count = limit
+else:
+    count = int(len(players[list(players.keys())[0]])/3)
 
 
 # create dictionaries of result scores and result strings for each possible team
