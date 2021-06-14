@@ -7,11 +7,15 @@ import os
 
 # load jsons as dictionaries
 player_dicts = {}
-for filename in os.listdir('players'):
-    if filename.endswith(".json") and filename!="Joey.json":
-        with open("players/"+filename) as f:
-            player_dicts[filename[:-5]] = json.load(f)
+def load_dicts(excluded={}):
+    for filename in os.listdir('players'):
+        if filename.endswith(".json") and not (filename[:-5] in excluded):
+            with open("players/"+filename) as f:
+                player_dicts[filename[:-5]] = json.load(f)
 
+
+# to exclude players, pass list containing names as strings into load_dicts(). If not, call without argument.
+load_dicts(["Joey"])
 
 # convert player json dictionary to result string dictionary
 players = {}
@@ -80,7 +84,7 @@ for team in teams:
                     break
             except IndexError:
                 print("ERROR: Player \'" + player + "\' did not hear " + str(int(i/3) +
-                                                                         1) + " bonuses. Change value of \'limit\' variable on line 20 appropriately.")
+                                                                             1) + " bonuses. Change value of \'limit\' variable on line 20 appropriately.")
                 sys.exit(1)
         # update result string
         result += got
